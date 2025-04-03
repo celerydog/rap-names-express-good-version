@@ -9,10 +9,14 @@ let db,
     dbConnectionStr = process.env.DB_STRING,
     dbName = 'rap'
 
+    console.log('Connection string!',dbConnectionStr)
+
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     .then(client => {
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
+    }).catch(e => {
+        console.error('failed to connect to db :(', e)
     })
     
 app.set('view engine', 'ejs')
@@ -22,6 +26,7 @@ app.use(express.json())
 
 
 app.get('/',(request, response)=>{
+    console.log('got a request for /')
     db.collection('rappers').find().sort({likes: -1}).toArray()
     .then(data => {
         response.render('index.ejs', { info: data })
