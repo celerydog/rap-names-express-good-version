@@ -45,13 +45,17 @@ app.post('/addRapper', (request, response) => {
 })
 
 app.put('/addOneLike', (request, response) => {
-    db.collection('rappers').updateOne({stageName: request.body.stageNameS, birthName: request.body.birthNameS,likes: request.body.likesS},{
+    db.collection('rappers').updateOne({
+        stageName: request.body.stageNameS, 
+        birthName: request.body.birthNameS
+    },
+        {
         $set: {
             likes:request.body.likesS + 1
           }
     },{
         sort: {_id: -1},
-        upsert: true
+        // upsert: true (upsert is update or insert - don't actually need insert due to form)
     })
     .then(result => {
         console.log('Added One Like')
