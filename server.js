@@ -1,6 +1,6 @@
-const express = require('express')
-const app = express()
-const MongoClient = require('mongodb').MongoClient
+const express = require('express') // node.js function find module named express, creates a new instance of the express framework
+const app = express() // variable that calls express
+const MongoClient = require('mongodb').MongoClient // node.js function to find mongodb, create an instance of the Mongoclient to connect to a cluster
 const PORT = 2121
 require('dotenv').config()
 
